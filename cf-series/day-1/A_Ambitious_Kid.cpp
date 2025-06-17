@@ -1,19 +1,35 @@
 /***
- * Objective:
+ * Objective: learn array manipulation and basic operations in C++. loops, conditionals, and functions. and absolute minimum calculation.
  *
- * Context:
+ * Context: Chaneka, Pak Chanek's child, is an ambitious kid, so Pak Chanek gives her the following problem to test her ambition.
+
+Given an array of integers [A1,A2,A3,…,AN]
+. In one operation, Chaneka can choose one element, then increase or decrease the element's value by 1
+. Chaneka can do that operation multiple times, even for different elements.
+
+What is the minimum number of operations that must be done to make it such that A1×A2×A3×…×AN=0
+?
  *
  *
- * Constrains:
+ * Constrains: 
+ * 1. 1<=N=<10^5
+ * 2. -10^5<=Ai<=10^5
  *
- *
- * Note:
+ * Note: I've learned about the abs() lib of cpp.
  *
  *
  * TODO:
  * Algorithm | Pseudo-code | Steps -- Write here
  *
- * 1.
+ * 1. start
+ * 2. input n
+ * 3. declare a vector of size n
+ * 4. input the elements of the vector
+ * 5. find absolute minimum of the vector
+ * 6. decrement the absolute minimum by 1 until 0 and count the number of operations
+ * 7. print the number of operations
+ * 8. end
+ *
  *
  */
 
@@ -24,29 +40,33 @@ int main()
 {
     /* Enter your code here. Read input from STDIN. Print output to STDOUT */
     int n;
-    cin >> n;
+    cin >> n; // Input the size of the array
 
-    vector<int> a(n);
+    vector<int> arr(n); // Declare a vector of size n
 
     for (int i = 0; i < n; i++)
     {
-        cin >> a[i];
+        cin >> arr[i]; // Input the elements of the vector
     }
 
-    int min = INT_MAX;
+    int min_element = INT_MAX; // Initialize min_element to maximum integer value
 
-    // absolute minimum value
-    for (int i = 0; i < n; i++)  // Fixed: Start from index 0, not 1
+    for (int i = 0; i < n; i++)
     {
-        int absValue = abs(a[i]);  // Use abs() function instead of conditional negation
-        
-        if (absValue < min)
-        {
-            min = absValue;
-        }
+        min_element = min(min_element, abs(arr[i])); // Find the absolute minimum of the vector
     }
 
-    cout << min << endl;
+    int operations = 0; // Initialize operations counter
+
+    // Decrement the absolute minimum by 1 until it reaches 0 and count the number of operations
+    while (min_element > 0)
+    {
+        min_element--; // Decrement the absolute minimum
+        operations++;  // Increment the operations counter
+    }
+
+    cout << operations << endl; // Print the number of operations
+    // The output is the number of operations needed to make the product zero
 
     return 0;
 }
